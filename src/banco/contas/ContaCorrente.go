@@ -1,16 +1,18 @@
 package contas
 
+import "github.com/leandro-ikehara/Estudos-GoLang/banco/clientes"
+
 type ContaCorrente struct {
-	Titular       string
+	Titular       clientes.Titular
 	NumeroAgencia int
 	NumeroConta   int
-	Saldo         float64
+	saldo         float64
 }
 
 func (c *ContaCorrente) Sacar(saque float64) string {
-	podeSacar := saque > 0 && saque <= c.Saldo
+	podeSacar := saque > 0 && saque <= c.saldo
 	if podeSacar {
-		c.Saldo -= saque
+		c.saldo -= saque
 		return "Saque realizado com sucesso"
 	} else {
 		return "Saldo insuficiente"
@@ -19,19 +21,23 @@ func (c *ContaCorrente) Sacar(saque float64) string {
 
 func (c *ContaCorrente) Depositar(deposito float64) (string, float64) {
 	if deposito > 0 {
-		c.Saldo += deposito
-		return "Deposito realizado com sucesso", c.Saldo
+		c.saldo += deposito
+		return "Deposito realizado com sucesso", c.saldo
 	} else {
-		return "Valor do deposito menor que zero", c.Saldo
+		return "Valor do deposito menor que zero", c.saldo
 	}
 }
 
 func (c *ContaCorrente) Tranferir(transferencia float64, contaDestino *ContaCorrente) bool {
-	if transferencia < c.Saldo && transferencia > 0 {
-		c.Saldo -= transferencia
+	if transferencia < c.saldo && transferencia > 0 {
+		c.saldo -= transferencia
 		contaDestino.Depositar(transferencia)
 		return true
 	} else {
 		return false
 	}
+}
+
+func (c *ContaCorrente) ObterSaldo() float64 {
+	return c.saldo
 }

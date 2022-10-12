@@ -1,40 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
 
-type ContaCorrente struct {
-	titular       string
-	numeroAgencia int
-	numeroConta   int
-	saldo         float64
-}
-
-func (c *ContaCorrente) Sacar(valorDoSaque float64) string {
-	podeSacar := valorDoSaque > 0 && valorDoSaque <= c.saldo
-	if podeSacar {
-		c.saldo -= valorDoSaque
-		return "Saque realizado com sucesso"
-	} else {
-		return "Saldo insuficiente"
-	}
-}
+	"github.com/leandro-ikehara/Estudos-GoLang/banco/contas"
+)
 
 func main() {
-	contaDaCintia := ContaCorrente{}
-	contaDaCintia.titular = "Silvia"
-	contaDaCintia.saldo = 549.90
 
-	fmt.Println(contaDaCintia.saldo)
+	contaDoLeandro := contas.ContaCorrente{Titular: "Leandro", Saldo: 125.5}
+	contaDaAna := contas.ContaCorrente{Titular: "Ana Paula", Saldo: 200.00}
 
-	fmt.Println(contaDaCintia.Sacar(409.9))
-	fmt.Println(contaDaCintia.saldo)
+	status := contaDaAna.Tranferir(-100, &contaDoLeandro)
 
-	// contaDoLeandro := ContaCorrente{titular: "Leandro",
-	//
-	//	numeroAgencia: 589, numeroConta: 65432, saldo: 125.5}
-	//
-	// contaDaAna := ContaCorrente{"Ana Paula", 589, 85246, 200.00}
-	//
-	// fmt.Println(contaDoLeandro)
-	// fmt.Println(contaDaAna)
+	fmt.Println(status)
+	fmt.Println(contaDoLeandro)
+	fmt.Println(contaDaAna)
 }

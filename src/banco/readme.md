@@ -20,7 +20,7 @@
 > - Em seguida, alteramos o campo titular da struct contaCorrente para ser do tipo da struct Titular;
 > - Para finalizar, alteramos a visibilidade do campo saldo e criamos um método chamado obterSaldo.
 
-# Go OO - Aula 5 - "Interface e novo tipo de conta"
+## Go OO - Aula 5 - "Interface e novo tipo de conta"
 > - Criamos um novo tipo de conta: a ContaPoupança;
 > - Para finalizar, criamos um novo tipo interface onde podemos utilizar tanto a conta corrente como poupança para pagar um boleto através da função Sacar.
 
